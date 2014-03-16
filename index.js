@@ -41,10 +41,10 @@ Box.prototype.getProgInfo = function(opts, cb) {
 
 Box.prototype.tune = function(chan, cb) {
   var reqOpts ={};
-  if(typeof opts === 'string' || typeof opts === 'number') {
-    reqOpts.major = opts;
+  if(typeof chan === 'string' || typeof opts === 'number') {
+    reqOpts.major = chan;
   } else {
-    reqOpts = opts;
+    reqOpts = chan; 
   }
   this._get('/tv/tune', reqOpts, cb);
 }
@@ -89,10 +89,11 @@ Box.prototype._get = function(url, opts, cb) {
   if(!cb) cb = function() {}
   var base = 'http://' + this.host + ':' + this.port;
   var reqOpts = {};
+  reqOpts.url = base + url;
   if(opts) reqOpts.qs = opts;
-  request.get(base + url, reqOpts, function(err, res, body) {
-    if(err) return cb(err, JSON.parse(body));
-    else cb(null, JSON.parse(body));
+  request(reqOpts, function(err, res, body) {
+    if(err) return cb(err, body);
+    else cb(null, body);
   });
 }
 
@@ -100,4 +101,4 @@ module.exports.box = function(opts) {
   return new Box(opts);
 }
 
-module.exports.version = '0.0.2';
+module.exports.version = '0.0.3';
