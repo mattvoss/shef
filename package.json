@@ -1,6 +1,6 @@
 {
   "name": "shef",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A node.js client for your DIRECTV boxes",
   "main": "index.js",
   "scripts": {
@@ -23,9 +23,9 @@
   "author": "Kevin O'Hara",
   "license": "MIT",
   "dependencies": {
-    "request": "~2.10.0"
+    "request": "*"
   },
   "devDependencies": {
-    "tap": "~0.3.0"
+    "tap": "*"
   }
 }
